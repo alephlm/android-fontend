@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.gov.ce.sda.androidsda.LoginActivity">
+    tools:context="br.gov.ce.sda.androidsda.activity.LoginActivity">
 
     <EditText
         android:id="@+id/etUsuario"
@@ -14,7 +14,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Usuário"
+        android:hint="@string/usuario"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -28,7 +28,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Senha"
+        android:hint="@string/senha"
         android:inputType="textPassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -42,7 +42,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
-        android:text="Entrar"
+        android:text="@string/entrar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
@@ -54,7 +54,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:text="Nova Conta"
+        android:text="@string/nova_conta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
