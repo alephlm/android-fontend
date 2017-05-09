@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Filme {
 
+    private Long id;
     private String titulo;
     private String categoria;
     private String diretor;
@@ -17,6 +18,10 @@ public class Filme {
     private String sinopse;
     private Date dataLancamento;
     private Integer nota;
+
+    public Long getId() {return id;}
+
+    public void setId(Long id) {this.id = id;}
 
     public String getTitulo() {
         return titulo;
@@ -73,4 +78,5 @@ public class Filme {
     public void setNota(Integer nota) {
         this.nota = nota;
     }
+
 }

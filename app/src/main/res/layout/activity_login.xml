@@ -16,6 +16,7 @@
         android:ems="10"
         android:hint="@string/usuario"
         android:inputType="textPersonName"
+        android:text="Aleph"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +31,7 @@
         android:ems="10"
         android:hint="@string/senha"
         android:inputType="textPassword"
+        android:text="test1234"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

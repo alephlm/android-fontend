@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity{
 
                 if(response.code() == 200){
                     Log.d(TAG, "onResponse: " + response.body().toString());
-                    Intent i = new Intent(la, ListaFilmesActivity.class);
+                    Intent i = new Intent(la, MainActivity.class);
                     startActivity(i);
                 } else {
                     Log.e(TAG, "onResponse: Usuário não autenticado.");
