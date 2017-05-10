@@ -21,7 +21,8 @@
         <activity android:name=".activity.FilmeActivity" />
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
+        <activity android:name=".activity.NovaContaActivity"></activity>
     </application>
 
 </manifest>

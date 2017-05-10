@@ -1,14 +1,31 @@
 package br.gov.ce.sda.androidsda.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+
+import java.util.List;
+
 import br.gov.ce.sda.androidsda.R;
+import br.gov.ce.sda.androidsda.activity.FilmeActivity;
+import br.gov.ce.sda.androidsda.adapter.FilmesAdapter;
+import br.gov.ce.sda.androidsda.adapter.ItemClickListener;
+import br.gov.ce.sda.androidsda.model.Filme;
+import br.gov.ce.sda.androidsda.rest.ServiceAPI;
+import br.gov.ce.sda.androidsda.rest.ServiceGenerator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +35,7 @@ import br.gov.ce.sda.androidsda.R;
  * Use the {@link FavoritosFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FavoritosFragment extends Fragment {
+public class FavoritosFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +46,13 @@ public class FavoritosFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private static final String TAG = FavoritosFragment.class.getSimpleName();
+    public static final String EXTRA_MESSAGE = "br.gov.ce.sda.FILME";
+
+    List<Filme> filmes;
+    FilmesAdapter fa;
+    private RecyclerView recyclerView = null;
 
     public FavoritosFragment() {
         // Required empty public constructor
@@ -64,8 +88,14 @@ public class FavoritosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favoritos, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_favoritos, container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_favoritos);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        listFilmes();
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,5 +135,34 @@ public class FavoritosFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void listFilmes(){
+        ServiceAPI serviceAPI = ServiceGenerator.createService(ServiceAPI.class);
+        String token = this.getActivity().getSharedPreferences("myPreferences", 0).getString("token", "");
+
+        Call<List<Filme>> call = serviceAPI.favoritos(token);
+
+        call.enqueue(new Callback<List<Filme>>() {
+            @Override
+            public void onResponse(Call<List<Filme>> call, Response<List<Filme>> response) {
+
+                filmes = response.body();
+                fa = new FilmesAdapter(filmes, R.layout.list_item_filme);
+                recyclerView.setAdapter(fa);
+                Log.d(TAG, "Number of movies received: " + filmes.size());
+
+                if(response.code() == 200){
+                    Log.d(TAG, "onResponse: " + response.body().toString());
+                } else {
+                    Log.e(TAG, "onResponse: Usuário não autenticado.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Filme>> call, Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
     }
 }

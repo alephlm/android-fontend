@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import br.gov.ce.sda.androidsda.R;
+import br.gov.ce.sda.androidsda.fragment.FilmesFragment;
 import br.gov.ce.sda.androidsda.model.Filme;
 import br.gov.ce.sda.androidsda.rest.ServiceAPI;
 import br.gov.ce.sda.androidsda.rest.ServiceGenerator;
@@ -34,7 +35,7 @@ public class FilmeActivity extends AppCompatActivity {
         FloatingActionButton favoritar = (FloatingActionButton) findViewById(R.id.fabFavoritar);
 
         Intent intent = getIntent();
-        String target = intent.getStringExtra(ListaFilmesActivity.EXTRA_MESSAGE);
+        String target = intent.getStringExtra(FilmesFragment.EXTRA_MESSAGE);
         Gson gs = new Gson();
         filme = gs.fromJson(target, Filme.class);
         titulo.setText(filme.getTitulo());

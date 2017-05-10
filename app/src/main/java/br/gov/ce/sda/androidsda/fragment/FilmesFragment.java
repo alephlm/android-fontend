@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.google.gson.Gson;
 
@@ -84,7 +85,6 @@ public class FilmesFragment extends Fragment implements ItemClickListener{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -93,10 +93,34 @@ public class FilmesFragment extends Fragment implements ItemClickListener{
 
         View view = inflater.inflate(R.layout.fragment_filmes, container, false);
 
+        SearchView sv = (SearchView) view.findViewById(R.id.svPesquisa);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         icl = this;
+
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d(TAG, "onQueryTextSubmit: ");
+                if(query.length() > 0){
+                    procuraFilme(query);
+                } else {
+                    listFilmes();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(TAG, "onQueryTextChange: ");
+                if(newText.length() == 0){
+                    listFilmes();
+                }
+                return false;
+            }
+        });
+
         listFilmes();
         return view;
     }
@@ -156,6 +180,36 @@ public class FilmesFragment extends Fragment implements ItemClickListener{
         String token = this.getActivity().getSharedPreferences("myPreferences", 0).getString("token", "");
 
         Call<List<Filme>> call = serviceAPI.listFilmes(token);
+
+        call.enqueue(new Callback<List<Filme>>() {
+            @Override
+            public void onResponse(Call<List<Filme>> call, Response<List<Filme>> response) {
+
+                filmes = response.body();
+                fa = new FilmesAdapter(filmes, R.layout.list_item_filme);
+                recyclerView.setAdapter(fa);
+                fa.setClickListener(icl);
+                Log.d(TAG, "Number of movies received: " + filmes.size());
+
+                if(response.code() == 200){
+                    Log.d(TAG, "onResponse: " + response.body().toString());
+                } else {
+                    Log.e(TAG, "onResponse: Usuário não autenticado.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Filme>> call, Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
+    }
+
+    private void procuraFilme(String titulo){
+        ServiceAPI serviceAPI = ServiceGenerator.createService(ServiceAPI.class);
+        String token = this.getActivity().getSharedPreferences("myPreferences", 0).getString("token", "");
+
+        Call<List<Filme>> call = serviceAPI.procuraFilme(token, titulo);
 
         call.enqueue(new Callback<List<Filme>>() {
             @Override

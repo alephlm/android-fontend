@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity{
                     Log.d(TAG, "onResponse: " + response.body().toString());
                     Intent i = new Intent(la, MainActivity.class);
                     startActivity(i);
+                    finish();
                 } else {
                     Log.e(TAG, "onResponse: Usuário não autenticado.");
                     Context context = getApplicationContext();

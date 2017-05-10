@@ -1,14 +1,18 @@
 package br.gov.ce.sda.androidsda.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import br.gov.ce.sda.androidsda.R;
+import br.gov.ce.sda.androidsda.activity.LoginActivity;
+import br.gov.ce.sda.androidsda.activity.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +69,17 @@ public class InicioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inicio, container, false);
+        View view = inflater.inflate(R.layout.fragment_inicio, container, false);
+        Button bSair = (Button) view.findViewById(R.id.bSair);
+        bSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
+                getActivity().finish();
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

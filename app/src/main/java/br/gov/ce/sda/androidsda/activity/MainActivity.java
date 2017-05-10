@@ -7,7 +7,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -68,6 +71,11 @@ public class MainActivity extends AppCompatActivity implements
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
+    }
+
     public void switchToFilmesFragment() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.container, new FilmesFragment()).commit();
@@ -80,6 +88,6 @@ public class MainActivity extends AppCompatActivity implements
 
     public void switchToFavoritosFragment() {
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.container, new InicioFragment()).commit();
+        manager.beginTransaction().replace(R.id.container, new FavoritosFragment()).commit();
     }
 }

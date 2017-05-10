@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * This interface contains signatures of methods for retrofit communication with server.
@@ -31,4 +32,10 @@ public interface ServiceAPI {
 
     @GET("user/favoritar/{id}")
     Call<String> favoritar(@Header("Authorization") String token, @Path("id") Long var);
+
+    @GET("filme/favoritos")
+    Call<List<Filme>> favoritos(@Header("Authorization") String token);
+
+    @GET("filme/procura")
+    Call<List<Filme>> procuraFilme(@Header("Authorization") String token, @Query("titulo") String titulo);
 }
