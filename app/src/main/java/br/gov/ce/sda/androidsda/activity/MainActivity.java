@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private static final String TAG = "MainActivity";
     private TextView mTextMessage;
+    String title = "";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -35,12 +36,15 @@ public class MainActivity extends AppCompatActivity implements
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    title = "Início";
                     switchToInicioFragment();
                     return true;
                 case R.id.navigation_dashboard:
+                    title = "Filmes";
                     switchToFilmesFragment();
                     return true;
                 case R.id.navigation_notifications:
+                    title = "Favoritos";
                     switchToFavoritosFragment();
                     return true;
             }
@@ -79,15 +83,18 @@ public class MainActivity extends AppCompatActivity implements
     public void switchToFilmesFragment() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.container, new FilmesFragment()).commit();
+        getSupportActionBar().setTitle(title);
     }
 
     public void switchToInicioFragment() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.container, new InicioFragment()).commit();
+        getSupportActionBar().setTitle(title);
     }
 
     public void switchToFavoritosFragment() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.container, new FavoritosFragment()).commit();
+        getSupportActionBar().setTitle(title);
     }
 }

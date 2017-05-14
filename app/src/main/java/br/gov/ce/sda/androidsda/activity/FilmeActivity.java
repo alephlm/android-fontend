@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+
 import br.gov.ce.sda.androidsda.R;
 import br.gov.ce.sda.androidsda.fragment.FilmesFragment;
 import br.gov.ce.sda.androidsda.model.Filme;
@@ -30,15 +32,27 @@ public class FilmeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filme);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         TextView titulo = (TextView) findViewById(R.id.tvTitulo);
+        TextView categoria = (TextView) findViewById(R.id.tvCategoria);
+        TextView sinopse = (TextView) findViewById(R.id.tvSinopse);
+        TextView dataLancamento = (TextView) findViewById(R.id.tvDataLancamento);
+        TextView diretor = (TextView) findViewById(R.id.tvDiretor);
+
         FloatingActionButton favoritar = (FloatingActionButton) findViewById(R.id.fabFavoritar);
 
         Intent intent = getIntent();
         String target = intent.getStringExtra(FilmesFragment.EXTRA_MESSAGE);
         Gson gs = new Gson();
         filme = gs.fromJson(target, Filme.class);
+
         titulo.setText(filme.getTitulo());
+        sinopse.setText(filme.getSinopse());
+        categoria.setText(filme.getCategoria());
+        diretor.setText(filme.getDiretor());
+        dataLancamento.setText(sdf.format(filme.getDataLancamento()));
+
 
         favoritar.setOnClickListener(new View.OnClickListener() {
             @Override

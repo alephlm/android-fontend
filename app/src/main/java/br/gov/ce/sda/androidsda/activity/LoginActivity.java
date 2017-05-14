@@ -52,6 +52,13 @@ public class LoginActivity extends AppCompatActivity{
                 login();
             }
         });
+        bNovaConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(la, NovaContaActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void login() {

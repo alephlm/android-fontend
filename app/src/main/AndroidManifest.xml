@@ -18,11 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.FilmeActivity" />
+        <activity
+            android:name=".activity.FilmeActivity"
+            android:label="@string/filme"/>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity android:name=".activity.NovaContaActivity"></activity>
+            android:label="@string/title_filmes" />
+        <activity android:name=".activity.NovaContaActivity"
+                  android:label="@string/nova_conta"></activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@
     <string name="title_home">Início</string>
     <string name="title_filmes">Filmes</string>
     <string name="title_favoritos">Favoritos</string>
+    <string name="filme">Filme</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="mensagem_tela_inicio">Filmes App - Bem vindo</string>
