@@ -14,7 +14,7 @@ private static final String BASE_URL = "http://SERVER_IP:SERVER_PORT/";
 ```
 Depois basta iniciar a aplicação no androidStudio. Usando emulador ou passando para um celular android.
 
-## Tecnologias Usadas no projetos.
+## Tecnologias utilizadas no projeto.
 * Codificação com [Android Studio](https://developer.android.com/studio/index.html)
 * Biblioteca [retrofit](http://square.github.io/retrofit/) para a comunicação com o servidor rest.
 
